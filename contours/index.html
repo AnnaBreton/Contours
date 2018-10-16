@@ -8,6 +8,66 @@
     var svg = d3.select("svg"),
         width = +svg.attr("width"),
         height = +svg.attr("height");
+    /* --------------------
+     Variables
+   -------------------- */
+
+    var width  = 960,
+        height = 600;
+
+
+    // Horizontal Lines
+    svg
+        .append('defs')
+        .append('pattern')
+        .attr('id', 'texture0')
+        .attr('patternUnits', 'userSpaceOnUse')
+        .attr('width', 6)
+        .attr('height', 6)
+        .append('path')
+        .attr('d', 'M 0 0 L 0 10')
+        .attr('stroke', '#3071B9')
+        .attr('stroke-width', 2);
+
+    // Dots
+    svg
+        .append('defs')
+        .append('pattern')
+        .attr('id', 'texture1')
+        .attr('patternUnits', 'userSpaceOnUse')
+        .attr('width', 5)
+        .attr('height', 5)
+        .append('circle')
+        .attr('cx', 4)
+        .attr('cy', 4)
+        .attr('r', 1)
+        .attr('fill', '#EA5532');
+
+    // Vertical Lines
+    svg
+        .append('defs')
+        .append('pattern')
+        .attr('id', 'texture2')
+        .attr('patternUnits', 'userSpaceOnUse')
+        .attr('width', 6)
+        .attr('height', 6)
+        .append('path')
+        .attr('d', 'M 0 0 L 10 0')
+        .attr('stroke', '#8FC31F')
+        .attr('stroke-width', 2);
+
+    // Cross Lines
+    svg
+        .append('defs')
+        .append('pattern')
+        .attr('id', 'texture3')
+        .attr('patternUnits', 'userSpaceOnUse')
+        .attr('width', 8)
+        .attr('height', 8)
+        .append('path')
+        .attr('d', 'M0 0L8 8ZM8 0L0 8Z')
+        .attr('stroke', '#C48AB2')
+        .attr('stroke-width', 1);
 
     var i0 = d3.interpolateHsvLong(d3.hsv(120, 1, 0.65), d3.hsv(60, 1, 0.90)),
         i1 = d3.interpolateHsvLong(d3.hsv(60, 1, 0.90), d3.hsv(0, 0, 0.95)),
@@ -24,7 +84,10 @@
                 (volcano.values))
             .enter().append("path")
             .attr("d", d3.geoPath(d3.geoIdentity().scale(width / volcano.width)))
-            .attr("fill", function(d) { return color(d.value); });
+            .attr('fill', function() {
+                var _ran = Math.floor( Math.random() * 4 );
+                return 'url(#texture' + _ran + ')';
+            });
     });
 
 </script>
